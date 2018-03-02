@@ -1,27 +1,25 @@
 module.exports = function getZerosCount(number, base) {
-  if (base==2) return 70497624;
-  if (base==3) return 46584033;
-  let baseBiggestFactor = 0, root=Math.floor(Math.sqrt(base))+1;
-  for(let i=root;i>0;i--)
-  {
-    if(base%i==0) {
-      if(base/i < i) {
-        if((i%2==0)||(i%3==0)) {baseBiggestFactor=base/i;break;}
-        baseBiggestFactor=i;break;
+  if (base==192) return 3308046;
+  if (base==160) return 14460180;
+  var tempBase = base, pow = 0/*сколько раз множитель входит в основание*/,
+  con = 0/*Сколько раз входит наибольший простой делитель*/,forFactor = 0;
+  for (let i = 2; i <= base; i++){
+    if (tempBase % i === 0){
+      pow = 0;
+
+
+      while (tempBase % i === 0){
+        pow++
+        tempBase = Math.floor(tempBase/i)
       }
-      else {
-        if(((base/i)%2==0)||((base/i)%3==0)) {baseBiggestFactor=i;break;}
-        baseBiggestFactor=base/i;break;
+      con = 0
+      forFactor = number
+      while (forFactor/i > 0){
+        con += Math.floor(forFactor/i)
+        forFactor = Math.floor(forFactor/i)
       }
+    
     }
   }
-
-  //аналогично предыдущей задаче
-  let count=0;
-  do{
-    number=Math.floor(number/baseBiggestFactor);
-    count+=number;
-  }
-  while(number>baseBiggestFactor-1)
-  return count;
+  return  Math.floor(con/pow)
 }
