@@ -1,15 +1,14 @@
-module.exports = function getZerosforFactor(number, base) {
+module.exports = function getZerosCount(number, base) {
   var results = [];
-  myNumber = number;
-  myBase = base;
-  for (let i=2;i<base, myBase>1;i++)//base?
-   if(myBase%i===0)
+  for (let i=2;i<base, base>1;i++)
+   if(base%i===0)
    {
-      pow = 0;
-     while (myBase%i===0)
+      pow = 1;
+      base/=i;
+     while (base%i===0)
      {
        pow++;
-       myBase/=i;
+       base/=i;
      }
      var count = 0;
      myNumber=number;
@@ -19,8 +18,6 @@ module.exports = function getZerosforFactor(number, base) {
     }
     results.push(Math.floor(count/pow));
    }
-   results.sort(function (a,b) {
-    return a-b;
-    });
+   results.sort((a,b) => a-b);
    return results[0];
 }
